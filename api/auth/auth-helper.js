@@ -3,7 +3,7 @@ const { JWT_SECRET } = require('../../config') // secret hehe
 
 function buildToken(user) {
   const payload = {
-    subject: user.user_id,
+    subject: user.id,
     username: user.username
   }
   const options = {

@@ -46,9 +46,7 @@ router.post('/register', checkUser, checkUsernameAvailable, (req, res, next) => 
     .then(newUser => {
       res.status(200).json(newUser)
     })
-    .catch(err => {
-      next(err)
-    })
+    .catch(next)
 })
 
 router.post('/login', checkUser, checkUsernameUnavailable, (req, res, next) => {
@@ -76,9 +74,9 @@ router.post('/login', checkUser, checkUsernameUnavailable, (req, res, next) => {
       the response body should include a string exactly as follows: "invalid credentials".
   */
   let { username, password } = req.body
-  User.findByUsername({ username })
-    .then(([user]) => {
-      if (user && bcrypt.compareSync(password, user.password)) {
+  User.findByUsername(username)
+    .then(user => {
+      if(user && bcrypt.compareSync(password, user.password)) {
         // ADD JSON WEB TOKEN HERE AND BELOW
         const token = buildToken(user)
         res.status(200).json({
