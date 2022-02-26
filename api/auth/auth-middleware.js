@@ -1,7 +1,7 @@
 // import users model
 const User = require('../users/users-model')
 
-const checkUser = (req, res, next) => {
+const checkUser = async (req, res, next) => {
   if(!req.body.username || !req.body.password) {
     next({
       status: 401,
@@ -29,7 +29,7 @@ const checkUsernameAvailable = async (req, res, next) => {
   if(username) {
     next({
       status: 401,
-      message: 'Error: invalid credentials! Try again.'
+      message: 'Error: that username is taken! Try again.'
     })
   }
 }

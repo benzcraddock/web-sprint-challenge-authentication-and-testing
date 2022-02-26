@@ -64,10 +64,6 @@ describe('test auth router API endpoints', () => {
         result = err
       })
 
-    test('responds with 200', async () => {
-      expect(result.status).toEqual(200)
-    })
-
     test('responds with 401', async () => {
       expect(result.status).toEqual(401)
     })

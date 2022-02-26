@@ -13,7 +13,7 @@ const {
   checkUsernameAvailable
 } = require('./auth-middleware')
 
-router.post('/register', checkUser, checkUsernameAvailable, (req, res, next) => {
+router.post('/register', async (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -47,9 +47,19 @@ router.post('/register', checkUser, checkUsernameAvailable, (req, res, next) => 
       res.status(200).json(newUser)
     })
     .catch(next)
+
+  // try {
+  //   let { username, password } = req.body
+  //   const hash = bcrypt.hashSync(password, BCRYPT_ROUNDS)
+  //   const newUser = await User.add({ username, password: hash })
+  //   res.status(200).json(newUser)
+  // }
+  // catch(err) {
+  //   next(err)
+  // }
 })
 
-router.post('/login', checkUser, checkUsernameUnavailable, (req, res, next) => {
+router.post('/login', (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
